@@ -7,6 +7,9 @@
 #include <algorithm>
 using namespace std;
 
+char getGuess(string prompt);
+void yesOrNo();
+
 int main()
 {
  do
@@ -15,89 +18,88 @@ int main()
     const int WRONG_MAX = 5; //attempt limit
     vector<string> words; //add vectors in here
     //adding words here
-    words.push_back("Alabama");
-    words.push_back("Alaska");
-    words.push_back("Arizona");
-    words.push_back("Arkansas");
-    words.push_back("California");
-    words.push_back("Colorado");
-    words.push_back("Connecticut");
-    words.push_back("Delaware");
-    words.push_back("Florida");
-    words.push_back("Georgia");
-    words.push_back("Hawaii");
-    words.push_back("Idaho");
-    words.push_back("Illinois");
-    words.push_back("Indiana");
-    words.push_back("Iowa");
-    words.push_back("Kansas");
-    words.push_back("Kentucky");
-    words.push_back("Louisiana");
-    words.push_back("Maine");
-    words.push_back("Maryland");
-    words.push_back("Massachusetts");
-    words.push_back("Michigan");
-    words.push_back("Minnesota");
-    words.push_back("Mississippi");
-    words.push_back("Missouri");
-    words.push_back("Montana");
-    words.push_back("Nebraska");
-    words.push_back("Nevada");
-    words.push_back("New Hampshire");
-    words.push_back("New Jersey");
-    words.push_back("New Mexico");
-    words.push_back("New York");
-    words.push_back("North Carolina");
-    words.push_back("North Dakota");
-    words.push_back("Ohio");
-    words.push_back("Oklahoma");
-    words.push_back("Oregon");
-    words.push_back("Pennsylvania");
-    words.push_back("Rhose Island");
-    words.push_back("South Carolina");
-    words.push_back("South Dakota");
-    words.push_back("Tennessee");
-    words.push_back("Texas");
-    words.push_back("Utah");
-    words.push_back("Vermont");
-    words.push_back("Virginia");
-    words.push_back("Washington");
-    words.push_back("West Virginia");
-    words.push_back("Wisconsin");
-    words.push_back("Wyoming");
+    words.push_back("ALABAMA");
+    words.push_back("ALASKA");
+    words.push_back("ARIZONA");
+    words.push_back("ARKANSAS");
+    words.push_back("CALIFORNIA");
+    words.push_back("COLORADO");
+    words.push_back("CONNECTICUT");
+    words.push_back("DELAWARE");
+    words.push_back("FLORIDA");
+    words.push_back("GEORGIA");
+    words.push_back("HAWAII");
+    words.push_back("IDAHO");
+    words.push_back("ILLINOIS");
+    words.push_back("INDIANA");
+    words.push_back("IOWA");
+    words.push_back("KANSAS");
+    words.push_back("KENTUCKY");
+    words.push_back("LOUISIANA");
+    words.push_back("MAINE");
+    words.push_back("MARYLAND");
+    words.push_back("MASSACHUSETTS");
+    words.push_back("MICHIGAN");
+    words.push_back("MINNESOTA");
+    words.push_back("MISSISSIPPI");
+    words.push_back("MISSOURI");
+    words.push_back("MONTANA");
+    words.push_back("NEBRASKA");
+    words.push_back("NEVADA");
+    words.push_back("NEW HAMPSHIRE");
+    words.push_back("NEW JERSEY");
+    words.push_back("NEW MEXICO");
+    words.push_back("NEW YORK");
+    words.push_back("NORTH CAROLINA");
+    words.push_back("NORTH DAKOTA");
+    words.push_back("OHIO");
+    words.push_back("OKLAHOMA");
+    words.push_back("OREGON");
+    words.push_back("PENNSYLVANIA");
+    words.push_back("RHODE ISLAND");
+    words.push_back("SOUTH CAROLINA");
+    words.push_back("SOUTH DAKOTA");
+    words.push_back("TENNESSEE");
+    words.push_back("TEXAS");
+    words.push_back("UTAH");
+    words.push_back("VERMONT");
+    words.push_back("VIRGINIA");
+    words.push_back("WASHINGTON");
+    words.push_back("WEST VIRGINIA");
+    words.push_back("WISCONSIN");
+    words.push_back("WYOMING");
     
-    srand(time(NULL));//seed for random numbers
+    srand(time(0));
     random_shuffle(words.begin(), words.end());//shuffles out words in random way
-    const string WORDS_TO_GUESS = words[0];
+    const string WORDS_TO_GUESS = words[0];//word to guess
     string soFar(WORDS_TO_GUESS.size(), '_');//created string filled with '_'
-    string usedLetters = "";
-    int wrong = 0; //counts the wrong letters
+    string usedLetters = ""; //shows which were already guessed
+    int wrong = 0; //counts the wrong guesses
 
-    cout<<"Welcome to Hangman!"<<endl;
+    cout<<"Welcome to Hangman! May the odds be ever in your favor"<<endl;
     //add main game loop
     while((wrong < WRONG_MAX) && (soFar != WORD_TO_GUESS))
     {
      cout<<"You have "<<(WRONG_MAX - wrong)<<" guesses left."<<endl;
-     cout<<"You've used this letter: "<<usedLetters<<endl.
-     cout<<"So far, the word looks like this: "<<soFar<<endl;
+     cout<<"These are the letters you have already used: "<<usedLetters<<endl.
+     cout<<"So far, this is what you're working with: "<<soFar<<endl;
      
-     char guess;
-     cout<<"Enter your guess: "<<endl;
-     cin>>guess;
-     guess = toupper(guess);
+     guess = getGuess("Enter your guess: ");
+     guess = toupper(guess);//converts lowercase letter to uppercase
 
      while(usedLetters.find(guess) != string::npos)//while entered something already used, keeps looping
      {
       cout<<"You've already guessed: "<<guess<<endl;
-      cout<<"Enter your guess: "<<endl;
-      cin>> guess;
+      guess = getGuess("Enter your guess: "
       guess = toupper(guess);
      }
 
      usedLetters += guess;
+
      if (WORD_TO_GUESS.find(guess) != string::npos)
      {
       cout<<"That's it! "<<guess<<" is in the word"<<endl;
+      //update soFar to include new letters guessed
       for(int i = 0;i < WORD_TO_GUESS.length(); i++)
       {
        if(WORD_TO_GUESS[i] == guess)
@@ -131,3 +133,9 @@ while(again == 'y' || again == 'Y');
 
 return 0;
 }
+
+char getGuess(string prompt)
+{
+ char character;
+ cout<<prompt;
+ cin>>character;
