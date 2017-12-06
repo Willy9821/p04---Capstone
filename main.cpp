@@ -8,10 +8,11 @@
 #include <istream>
 using namespace std;
 
+string firstName;
+hangman person;
 char again;
 char display();
 void prompt();
-char getResponse(char& a);
 void correctOrWrong(const string& a, char& b,int& c);
 
 int main()
@@ -82,7 +83,12 @@ int main()
     cout<<"$  Welcome to Hangman! May the odds be ever in your favor.  $"<<endl;
     cout<<"$                                                           $"<<endl;
     cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
-   
+  
+  cout<<"Please enter your name."<<endl;
+  cin>>firstName;
+  
+  person.setName(firstName);
+
   while(misses < WRONG_MAX)
    {
     cout<<"You have "<<(WRONG_MAX -misses)<<" guesses left."<<endl;
@@ -90,7 +96,7 @@ int main()
     cout<<display()<<endl;
     char response;
     prompt();
-    getResponse(response);
+    person.getResponse(response);
     response = toupper(response);//makes the character which was guessed uppercase.
    
     while(exposed.find(response) != string::npos)//searches the string for the first occurence of the sequence specified, string::npos goes until it reaches the end of the string.
@@ -102,11 +108,11 @@ int main()
 
    if(misses == WRONG_MAX)
    {
-    cout<<"GAME OVER!! YOU'VE BEEN HANGED!!"<<endl;
+    cout<<"GAME OVER!! "<<firstName<<" HAS BEEN HANGED!!"<<endl;
    }
    else
    {
-    cout<<"CONGRATULATIONS!! YOU GUESSED CORRECTLY"<<endl;
+    cout<<"CONGRATULATIONS "<<firstName<<" !! YOU GUESSED CORRECTLY"<<endl;
    }
  
    cout<<"The word was "<<WORDS_TO_GUESS<<endl;//displays the word the user had to guess.
@@ -138,12 +144,6 @@ void prompt()
  cout<<"Enter your guess"<<endl;
 }
 
-char getResponse(char& a)
-{
- cin>>a;
- return a;
-}
-
 
 void correctOrWrong(const string& a, char& b, int& d)
 {
@@ -153,7 +153,7 @@ void correctOrWrong(const string& a, char& b, int& d)
  }
  else
  {
-  cout<<"Sorry, but "<<b<<" is not a letter in the word you're trying to guess."<<endl;
+  cout<<"Sorry, but "<<b<<" is not a letter in the word you're trying to guess."<<endl;  
   d++;
  }
 }
