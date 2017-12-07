@@ -135,7 +135,7 @@ char display()
    {
     WORDS_TO_GUESS[i] = '*';
    }
-   return WORDS_TO_GUESS[i];
+   return WORDS_TO_GUESS;
 }
 
 
