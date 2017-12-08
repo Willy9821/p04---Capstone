@@ -18,6 +18,11 @@ void correctOrWrong(const string& a, char& b, string& c, int& d);
 
 int main()
 {
+ cout<<"Please enter your name: "<<endl;
+ cin>>firstName;
+
+ person.setName(firstName);
+
  do
  {
     const int WRONG_MAX = 5; //attempt limit
@@ -80,24 +85,21 @@ int main()
     string exposed = " ";//letters already guessed.
     string display(wordToGuess.size(), '*');//letter in the word guessed so far
 
-    cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
-    cout<<"$                                                           $"<<endl; 
-    cout<<"$  WELCOME TO HANGMAN! MAY THE ODDS BE EVER IN YOUR FAVOR.  $"<<endl;
-    cout<<"$                                                           $"<<endl;
-    cout<<"$       (two words are spaced with a '_')                   $"<<endl;
-    cout<<"$                                                           $"<<endl;
-    cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
+    cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
+    cout<<"$                                        $"<<endl; 
+    cout<<"$          WELCOME TO HANGMAN!           $"<<endl;                            
+    cout<<"$  MAY THE ODDS BE EVER IN YOUR FAVOR.   $"<<endl;
+    cout<<"$                                        $"<<endl;
+    cout<<"$  (two words are spaced with a '_')     $"<<endl;
+    cout<<"$                                        $"<<endl;
+    cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
   
-  cout<<"Please enter your name."<<endl;
-  cin>>firstName;
-  
-  person.setName(firstName);
   
   while((misses < WRONG_MAX)&&(display != wordToGuess))
   {
-    cout<<"You have "<<(WRONG_MAX -misses)<<" guesses left."<<endl;
+    cout<<firstName<<" you have "<<(WRONG_MAX -misses)<<" guesses left."<<endl;
     cout<<"Here is the word you have to guess: ";
-    cout<<"So far the word is: "<<display<<endl;
+    cout<<display<<endl;
 
     char response;
     prompt();
