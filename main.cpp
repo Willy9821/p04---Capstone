@@ -79,7 +79,7 @@ int main()
     string wordToGuess = words[0];//word to guess.
     int misses = 0; //counts the wrong guesses.
     string exposed = " ";//letters already guessed.
-    string soFar(wordToGuess.size(), '-');
+    string alreadyUsed(wordToGuess.size(), '-');//word guessed so far
 
     cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
     cout<<"$                                                           $"<<endl; 
@@ -92,7 +92,7 @@ int main()
   
   person.setName(firstName);
   
-  while((misses < WRONG_MAX)&&(soFar != wordToGuess))
+  while((misses < WRONG_MAX)&&(alreadyUsed != wordToGuess))
   {
     cout<<"You have "<<(WRONG_MAX -misses)<<" guesses left."<<endl;
     cout<<"Here is the word you have to guess: ";
@@ -113,7 +113,7 @@ int main()
 
     exposed += response;
 
-    correctOrWrong(wordToGuess, response, soFar, misses);//function that checks to see if the letter guessed is in the word or not.
+    correctOrWrong(wordToGuess, response, alreadyUsed, misses);//function that checks to see if the letter guessed is in the word or not.
   }
 
    if(misses == WRONG_MAX)
@@ -166,7 +166,7 @@ void correctOrWrong(const string& a, char& b, string& c, int& d)
  if(a.find(b) != string::npos)
  {
   cout<<"Congrats! "<<b<<" is a letter in the word you're trying to guess."<<endl; 
-  //update soFar with the newewst guessed letter
+  //update alreadyUsed with the newewst guessed letter
   for(int i=0; i<a.length(); i++)
   {
    if(a[i] == b)
