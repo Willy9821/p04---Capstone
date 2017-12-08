@@ -13,7 +13,6 @@ string firstName;
 hangman person;
 char again;
 char getResponse(char& a);
-string display(string);
 void prompt();
 void correctOrWrong(const string& a, char& b, string& c, int& d);
 
@@ -52,25 +51,25 @@ int main()
     words.push_back("NEBRASKA");
     words.push_back("NEVADA");
     words.push_back("NEW HAMPSHIRE");
-    words.push_back("NEW JERSEY");
-    words.push_back("NEW MEXICO");
-    words.push_back("NEW YORK");
-    words.push_back("NORTH CAROLINA");
-    words.push_back("NORTH DAKOTA");
+    words.push_back("NEW_JERSEY");
+    words.push_back("NEW_MEXICO");
+    words.push_back("NEW_YORK");
+    words.push_back("NORTH_CAROLINA");
+    words.push_back("NORTH_DAKOTA");
     words.push_back("OHIO");
     words.push_back("OKLAHOMA");
     words.push_back("OREGON");
     words.push_back("PENNSYLVANIA");
-    words.push_back("RHODE ISLAND");
-    words.push_back("SOUTH CAROLINA");
-    words.push_back("SOUTH DAKOTA");
+    words.push_back("RHODE_ISLAND");
+    words.push_back("SOUTH_CAROLINA");
+    words.push_back("SOUTH_DAKOTA");
     words.push_back("TENNESSEE");
     words.push_back("TEXAS");
     words.push_back("UTAH");
     words.push_back("VERMONT");
     words.push_back("VIRGINIA");
     words.push_back("WASHINGTON");
-    words.push_back("WEST VIRGINIA");
+    words.push_back("WEST_VIRGINIA");
     words.push_back("WISCONSIN");
     words.push_back("WYOMING");
     
@@ -79,11 +78,13 @@ int main()
     string wordToGuess = words[0];//word to guess.
     int misses = 0; //counts the wrong guesses.
     string exposed = " ";//letters already guessed.
-    string alreadyUsed(wordToGuess.size(), '-');//word guessed so far
+    string display(wordToGuess.size(), '*');//letter in the word guessed so far
 
     cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
     cout<<"$                                                           $"<<endl; 
-    cout<<"$  Welcome to Hangman! May the odds be ever in your favor.  $"<<endl;
+    cout<<"$  WELCOME TO HANGMAN! MAY THE ODDS BE EVER IN YOUR FAVOR.  $"<<endl;
+    cout<<"$                                                           $"<<endl;
+    cout<<"$       (two words are spaced with a '_')                   $"<<endl;
     cout<<"$                                                           $"<<endl;
     cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
   
@@ -92,11 +93,11 @@ int main()
   
   person.setName(firstName);
   
-  while((misses < WRONG_MAX)&&(alreadyUsed != wordToGuess))
+  while((misses < WRONG_MAX)&&(display != wordToGuess))
   {
     cout<<"You have "<<(WRONG_MAX -misses)<<" guesses left."<<endl;
     cout<<"Here is the word you have to guess: ";
-    cout<<display(wordToGuess)<<endl;
+    cout<<"So far the word is: "<<display<<endl;
 
     char response;
     prompt();
@@ -113,7 +114,7 @@ int main()
 
     exposed += response;
 
-    correctOrWrong(wordToGuess, response, alreadyUsed, misses);//function that checks to see if the letter guessed is in the word or not.
+    correctOrWrong(wordToGuess, response, display, misses);//function that checks to see if the letter guessed is in the word or not.
   }
 
    if(misses == WRONG_MAX)
@@ -138,16 +139,6 @@ return 0;
 }
 
 
-string display(string wordToGuess)
-{
-  for(int i=0; i < wordToGuess.length(); i++)
-   {
-    wordToGuess[i] = '*';
-   }
-   return wordToGuess;
-}
-
-
 void prompt()
 {
  cout<<"Enter your guess"<<endl;
@@ -166,7 +157,7 @@ void correctOrWrong(const string& a, char& b, string& c, int& d)
  if(a.find(b) != string::npos)
  {
   cout<<"Congrats! "<<b<<" is a letter in the word you're trying to guess."<<endl; 
-  //update alreadyUsed with the newewst guessed letter
+  //update display with the newewst guessed letter
   for(int i=0; i<a.length(); i++)
   {
    if(a[i] == b)
