@@ -90,7 +90,7 @@ int main()
     cout<<"$          WELCOME TO HANGMAN!           $"<<endl;                            
     cout<<"$  MAY THE ODDS BE EVER IN YOUR FAVOR.   $"<<endl;
     cout<<"$                                        $"<<endl;
-    cout<<"$  (two words are spaced with a '_')     $"<<endl;
+    cout<<"$  (Some words are spaced with a '_')    $"<<endl;
     cout<<"$                                        $"<<endl;
     cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
   
