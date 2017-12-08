@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <cctype>
 #include <algorithm>
 #include <istream>
 using namespace std;
@@ -11,9 +12,10 @@ using namespace std;
 string firstName;
 hangman person;
 char again;
-char display();
+char getResponse(char& a);
+string display(string);
 void prompt();
-void correctOrWrong(const string& a, char& b,int& c);
+void correctOrWrong(const string& a, char& b, string& c, int& d);
 
 int main()
 {
@@ -74,9 +76,10 @@ int main()
     
     srand(time(0));
     random_shuffle(words.begin(), words.end());//<algorithm> Rearranges the elements in the range (first, last) randomly.
-    const string WORDS_TO_GUESS = words[0];//word to guess
-    int misses = 0; //counts the wrong guesses
-    string exposed = " ";//letters already guessed
+    string wordToGuess = words[0];//word to guess.
+    int misses = 0; //counts the wrong guesses.
+    string exposed = " ";//letters already guessed.
+    string soFar(wordToGuess.size(), '-');
 
     cout<<"$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<endl;
     cout<<"$                                                           $"<<endl; 
@@ -88,34 +91,41 @@ int main()
   cin>>firstName;
   
   person.setName(firstName);
-
-  while(misses < WRONG_MAX)
-   {
+  
+  while((misses < WRONG_MAX)&&(soFar != wordToGuess))
+  {
     cout<<"You have "<<(WRONG_MAX -misses)<<" guesses left."<<endl;
     cout<<"Here is the word you have to guess: ";
-    cout<<display()<<endl;
+    cout<<display(wordToGuess)<<endl;
+
     char response;
     prompt();
-    person.getResponse(response);
-    response = toupper(response);//makes the character which was guessed uppercase.
+    getResponse(response);
+    response = toupper(response);//,<cctype>makes the character which was guessed uppercase.
    
     while(exposed.find(response) != string::npos)//searches the string for the first occurence of the sequence specified, string::npos goes until it reaches the end of the string.
     {
      cout<<"You have already guessed this letter."<<endl;
+     prompt();
+     getResponse(response);
+     response = toupper(response);
     }
-    correctOrWrong(WORDS_TO_GUESS, response, misses);//function that checks to see if the letter guessed is in the word or not.
-   }
+
+    exposed += response;
+
+    correctOrWrong(wordToGuess, response, soFar, misses);//function that checks to see if the letter guessed is in the word or not.
+  }
 
    if(misses == WRONG_MAX)
    {
-    cout<<"GAME OVER!! "<<firstName<<" HAS BEEN HANGED!!"<<endl;
+    cout<<"GAME OVER!! "<<firstName<<" HAS BEEN HUNG!!"<<endl;
    }
    else
    {
     cout<<"CONGRATULATIONS "<<firstName<<" !! YOU GUESSED CORRECTLY"<<endl;
    }
  
-   cout<<"The word was "<<WORDS_TO_GUESS<<endl;//displays the word the user had to guess.
+   cout<<"The word was "<<wordToGuess<<endl;//displays the word the user had to guess.
 
    cout<<"Would you like to play again?(Enter Y or N)"<<endl;
    cin>>again;
@@ -128,14 +138,13 @@ return 0;
 }
 
 
-char display()
+string display(string wordToGuess)
 {
- const string WORDS_TO_GUESS;
-  for(int i=0; i < WORDS_TO_GUESS.length(); i++)
+  for(int i=0; i < wordToGuess.length(); i++)
    {
-    WORDS_TO_GUESS[i] = '*';
+    wordToGuess[i] = '*';
    }
-   return WORDS_TO_GUESS;
+   return wordToGuess;
 }
 
 
@@ -145,12 +154,28 @@ void prompt()
 }
 
 
-void correctOrWrong(const string& a, char& b, int& d)
+char getResponse(char& a)
+{
+ cin>>a;
+ return a;
+}
+
+
+void correctOrWrong(const string& a, char& b, string& c, int& d)
 {
  if(a.find(b) != string::npos)
  {
-  cout<<"Congrats! "<<b<<" is a letter in the word you're trying to guess."<<endl;
- }
+  cout<<"Congrats! "<<b<<" is a letter in the word you're trying to guess."<<endl; 
+  //update soFar with the newewst guessed letter
+  for(int i=0; i<a.length(); i++)
+  {
+   if(a[i] == b)
+   {
+    c[i] = b;
+   }
+  }
+ } 
+
  else
  {
   cout<<"Sorry, but "<<b<<" is not a letter in the word you're trying to guess."<<endl;  

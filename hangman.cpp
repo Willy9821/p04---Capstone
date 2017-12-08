@@ -10,7 +10,3 @@ void hangman::setName(string first)
  firstName = first;
 }
 
-char hangman::getResponse(char& a)
-{
- return a;
-}

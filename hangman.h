@@ -10,11 +10,9 @@ class hangman
 {
     private:
       string firstName;  
-      char response;
 
     public:
       void setName(string);
-      char getResponse(char& a);
 
 };
 
