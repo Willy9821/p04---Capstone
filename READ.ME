@@ -1,16 +1,28 @@
 //Author Willy Iparraguirre
-#Input/Output
+# Input/Output
+[main.cpp lines 81-88, 120-125](/main.cpp#L81-88)(/main.cpp#L120-L125)
+I show mastery in this section because I ask the user to enter their name using cout<<, and then I take in the response and save it as their name using cin>>. Also I ask if they want to play again using cout<< and cin>> to take in their answer.
 
-#ControlFlow
+# ControlFlow
+[main.cpp lines 109-116](/main.cpp#L109-L116)
+I show mastery in this section because I created an if loop for if the amount of times the user guessed was wrong was equal to the max wrong it would display the message that they lost, and following the if statement I have an else statement so when going through the if loop and having it not being true it would go down to the else statement and display the message that they won.
 
-#Iteration
+# Iteration
+[main.cpp lines 92-107, 20-196](/main.cpp#L92-L107)
+Since my main program is a game I have a do loop that engulfs the whole program and a while loop at the bottom that will cause the program to run again if the user enters y or Y when asked to play again. Also in my code I have a while loop that makes sure that as long as the amount of misses is less than the max amount of misses, it would display how many guesses they have left and display the word it has to guess, and then within the while loop it will check to see if a letter was already guessed. 
 
-#Data Structure
+# Data Structure
+[main.cpp lines 23-73](/main.cpp#L23-L73)
+In my program I created a vector of strings called words, and in this vector I put the 50 states as the words the user will have to guess when playing the game.
 
-#Function
+# Function
+[main.cpp lines 142-145, 131-138, 148-157](/main.cpp#L142-L145)(/main.cpp#L131-138)(/main.cpp#L148-157)
+The first function that I created was a non-void return type called char display(string) and in this function I take the word the user has to guess and replace each character in the string and return the word with * to represent the letters in the word. The second function that I demostrate mastery in a void return type called void prompt() which prompts the user to enter a guess and don't return anything. Another function that I created was a pass-by-value called correctOrWrong(const string& a, char& b, string& c, int& d), in this function const string& a is referring to the word the user has to guess, char& b is referring to guess the user had, string& c is to keep track of the letters the user has guessed, and the int& d is to keep count of the amount of misses the user has.
 
-#FileIO
+# FileIO
 
-#Class
 
+# Class
+[hangman.h, hangman.cpp](/hangman.cpp#L8-L11)(/hangman.h#L9-L15)
+I created a class called hangman, under private I included string firstName since it is not needed to directly operate and in the public I included void setName(string) since this is necessary to operate.
 
